@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+:root {
+  --primary-color: #fff;
+  --secondary-color:rgba(0, 0, 0, 0.981);
+  --tertiary-color: #62e847;
+  --other-color: #0d0d0d;
+  --primary-font-family: "Oswald", serif;;
+  --spacing-unit: 1rem;
+  --border-radius: 8px;
+
+}
+.montserrat-large {
+  font-family: "Montserrat", serif;
+
+}
+
+
+body {
+  background-color: #0A0A0A; /* Deep black background */
+  color: #EDEDED;            /* Light text */
+}
+
+
+
+.button-primary:hover{
+  background-color: #3eff12;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
