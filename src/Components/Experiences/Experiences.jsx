@@ -51,15 +51,8 @@ const skillCategories = [
 
 const SkillsSection = () => {
   return (
-    <section className="relative py-32 px-6 md:px-20 bg-white dark:bg-[#051504] transition-colors duration-500">
-      {/* Soft Glow BG */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1 }}
-        className="absolute inset-0 bg-gradient-to-br from-green-200/10 to-blue-300/10 blur-2xl z-0"
-      />
-
+    <section className="relative py-32 px-6 md:px-20 duration-500">
+    
       <div className="relative z-10 max-w-6xl mx-auto">
         <h2 className="text-4xl font-bold text-center text-green-500 mb-20">
           Skills

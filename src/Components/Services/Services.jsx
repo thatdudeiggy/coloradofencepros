@@ -45,7 +45,7 @@ const FeatureCard = ({ id, title, description, icon, inView }) => (
     initial={{ opacity: 0, y: 30, scale: 0.9 }}
     animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
     transition={{ duration: 0.6, delay: id * 0.15, ease: "easeOut" }}
-    className="glassmorphism p-6 rounded-xl shadow-lg border border-gray-700 text-start w-full max-w-sm bg-white/10 backdrop-blur-md"
+    className="glassmorphism p-6 rounded-xl shadow-lg text-start w-full max-w-sm "
   >
     <div className="flex justify-between items-center mb-4">
       <span className="text-3xl text-green-500 font-bold">{`0${id}`}</span>
@@ -79,14 +79,6 @@ const PortfolioFeaturesSection = () => {
         ))}
       </motion.div>
 
-
-      {/* Background Blur Effect */}
-      <motion.div
-        className="absolute inset-0 bg-gradient-to-br from-green-700/20 to-blue-700/20 blur-3xl -z-10"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 0.3 }}
-        transition={{ duration: 2 }}
-      />
     </motion.div>
   );
 };
