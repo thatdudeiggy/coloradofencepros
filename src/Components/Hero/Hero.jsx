@@ -1,116 +1,123 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import joeman from '../../Assets/joeman.png';
-import joecv from '../../Assets/joecv.pdf';
 import { FaLinkedin, FaTwitter, FaGithub, FaInstagram } from 'react-icons/fa';
+import profile from '../../Assets/pic.png';
+import joecv from '../../Assets/joecv.pdf';
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      duration: 0.8,
+      when: 'beforeChildren',
+      staggerChildren: 0.3
+    }
+  }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0 }
+};
+
+const socialLinks = [
+  { icon: FaLinkedin, url: 'https://www.linkedin.com/in/jeylan-tesi-53a746257/' },
+  { icon: FaTwitter, url: 'https://x.com/jetu81' },
+  { icon: FaGithub, url: 'https://github.com/jeylanab/' },
+  { icon: FaInstagram, url: 'https://www.instagram.com/your-profile' }
+];
 
 export const Hero = () => {
   return (
     <motion.div
-      className="bg-black text-white min-h-screen py-16 px-4 flex flex-col justify-center items-center relative overflow-hidden"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 1 }}
+      className="relative text-black min-h-screen flex items-center justify-center px-6 py-24"
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
     >
-      {/* Background Halo */}
-      <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-[#0f0f0f] via-[#111] to-[#1a1a1a] z-0" />
+      <div className="max-w-7xl w-full flex flex-col-reverse lg:flex-row items-center justify-between gap-10 z-10">
 
-      {/* Content */}
-      <div className="flex flex-col-reverse lg:flex-row items-center justify-between w-full max-w-6xl z-10">
-        {/* Left Text Section */}
-        <motion.div
-          className="text-center lg:text-left lg:w-1/2 space-y-4 sm:space-y-6"
-          initial={{ x: -60, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          transition={{ duration: 0.8 }}
-        >
-          <p className="text-green-400 text-xs sm:text-sm tracking-widest uppercase">Hello There!</p>
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight">
-            I’m <span className="text-green-400">Jeylan Abdo</span>,<br />
-            Full-Stack Developer.
-          </h1>
-          <p className="text-gray-400 text-sm sm:text-base max-w-md mx-auto lg:mx-0">
-            MERN stack developer building fast, responsive apps with great UI.
-          </p>
+{/* Left - Text */}
+<motion.div
+  className="flex-1 text-center lg:text-left space-y-3"
+  variants={itemVariants}
+>
+  <p className="text-black uppercase tracking-widest text-base sm:text-lg font-medium">
+    👋 Hello
+  </p>
 
-          {/* Buttons */}
-          <div className="flex flex-wrap gap-4 mt-5 justify-center lg:justify-start">
-            <a href="#projects">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                className="bg-white text-black px-5 py-2 sm:px-6 sm:py-3 rounded-full font-semibold shadow-lg hover:bg-green-400 hover:text-black transition text-sm sm:text-base"
-              >
-                View Work
-              </motion.button>
-            </a>
-            <a href={joecv} download>
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                className="bg-black/50 border border-white px-5 py-2 sm:px-6 sm:py-3 rounded-full font-semibold backdrop-blur-md hover:bg-white hover:text-black transition text-sm sm:text-base"
-              >
-                Download CV
-              </motion.button>
-            </a>
-          </div>
+  <h1 className="text-4xl sm:text-6xl font-extrabold leading-tight">
+    I'm <span className="text-green-400 font-bold font-poppins">Jane Doe</span>
+    <br />
+    UI/UX Designer
+  </h1>
 
-          {/* Social Icons */}
-          <div className="flex gap-5 mt-6 justify-center lg:justify-start">
-            {[
-              { icon: <FaLinkedin />, url: "https://www.linkedin.com/in/jeylan-tesi-53a746257/" },
-              { icon: <FaTwitter />, url: "https://x.com/jetu81" },
-              { icon: <FaGithub />, url: "https://github.com/jeylanab/" },
-              { icon: <FaInstagram />, url: "https://www.instagram.com/your-profile" }
-            ].map(({ icon, url }, i) => (
-              <a href={url} key={i} target="_blank" rel="noopener noreferrer"
-                className="text-green-400 text-xl sm:text-2xl hover:scale-110 hover:text-white transition">
-                {icon}
-              </a>
-            ))}
-          </div>
-        </motion.div>
+  <p className="text-gray-950 text-sm sm:text-xl max-w-md mx-auto lg:mx-0 leading-relaxed">
+    I design stunning, user-focused interfaces for websites and digital products. Clean aesthetics meet strategic UX.
+  </p>
 
-        {/* Right Image Section */}
-        <motion.div
-          className="relative lg:w-1/2 mb-10 lg:mb-0 flex justify-center items-center"
-          initial={{ x: 60, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          transition={{ duration: 0.8 }}
-        >
-          <div className="absolute bg-green-400 w-64 h-64 sm:w-80 sm:h-80 rounded-full blur-3xl opacity-20 z-0" />
-          <motion.div whileHover={{ scale: 1.05, rotate: 1 }} className="relative z-10">
-            <img
-              src={joeman}
-              alt="Jeylan Abdo"
-              className="w-52 sm:w-64 lg:w-[400px] rounded-full border-4 border-green-400 shadow-xl"
-            />
-            {/* Badge (optional to hide on XS screens) */}
-            <motion.div
-              className="absolute bottom-4 right-4 bg-green-500 px-3 py-1 rounded-full text-black font-semibold text-xs sm:text-sm shadow-lg"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 1 }}
-            >
-              MERN Stack Developer
-            </motion.div>
-          </motion.div>
-        </motion.div>
-      </div>
+  {/* CTA Buttons */}
+  <div className="flex flex-wrap justify-center lg:justify-start gap-4 pt-4">
+    <motion.a
+      href="#projects"
+      whileHover={{ scale: 1.05 }}
+      className="bg-green-500 text-black px-7 py-3.5 rounded-md font-semibold text-base sm:text-lg shadow-lg transition"
+    >
+      View My Designs
+    </motion.a>
+    <motion.a
+      href={joecv}
+      download
+      whileHover={{ scale: 1.05 }}
+      className="border border-green-400 px-7 py-3.5 rounded-md font-semibold text-green-500 hover:bg-green-500 hover:text-black transition text-base sm:text-lg"
+    >
+      Download Resume
+    </motion.a>
+  </div>
 
-      {/* Tech Stack Marquee */}
-      <div className="w-full overflow-hidden bg-green-400 mt-12 sm:mt-16 relative">
-        <div className="flex animate-marquee whitespace-nowrap text-black font-semibold text-sm sm:text-lg py-3 space-x-10 sm:space-x-16 px-4">
-          <span>React.js</span>
-          <span>Node.js</span>
-          <span>MongoDB</span>
-          <span>Express.js</span>
-          <span>UI/UX</span>
-          <span>Tailwind CSS</span>
-          <span>Firebase</span>
-          <span>REST API</span>
-          <span>Git & GitHub</span>
-        </div>
-        <div className="absolute top-0 left-0 w-10 sm:w-20 h-full bg-gradient-to-r from-green-400 to-transparent z-10"></div>
-        <div className="absolute top-0 right-0 w-10 sm:w-20 h-full bg-gradient-to-l from-green-400 to-transparent z-10"></div>
+  {/* Social Icons */}
+  <div className="flex justify-center lg:justify-start gap-6 pt-6">
+    {socialLinks.map(({ icon: Icon, url }, i) => (
+      <a
+        key={i}
+        href={url}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={`Social profile link`}
+        className="text-green-600 text-3xl hover:text-black transition transform hover:scale-110"
+      >
+        <Icon />
+      </a>
+    ))}
+  </div>
+</motion.div>
+
+
+{/* Right - Image (Modern Overlap Design - Final) */}
+<motion.div
+  className="flex-1 flex justify-center items-center relative"
+  variants={itemVariants}
+>
+  {/* Green rectangle background shape */}
+  <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 lg:-translate-x-0 lg:left-auto lg:right-12 bg-green-500 w-72 h-72 sm:w-80 sm:h-80 lg:w-[420px] lg:h-[420px] rounded-xl z-0"></div>
+
+  {/* Image block overlapping the shape */}
+  <div className="relative z-10 -mt-28 sm:-mt-36 lg:-mt-52 lg:mr-12">
+    <img
+      src={profile}
+      alt="Jane Doe"
+      className="w-72 shadow-none sm:w-96 lg:w-[460px] rounded-2xl object-cover shadow-xl"
+    />
+    <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 text-black text-xs sm:text-sm px-4 py-1 rounded-full font-semibold shadow-md bg-white">
+      UI/UX Portfolio 2025
+    </div>
+  </div>
+</motion.div>
+
+
+
+
       </div>
     </motion.div>
   );
