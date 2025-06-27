@@ -4,52 +4,52 @@ import { useInView } from "react-intersection-observer";
 import { motion } from "framer-motion";
 
 const Stats = () => {
+  const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.5 });
+
   const stats = [
-    { value: 2, label: "Years of Experience" },
-    { value: 15, label: "Projects Completed" },
-    { value: 8, label: "Technologies Specialized" },
-    { value: 500, label: "Code Commits on Github" },
+    { value: 3.5, suffix: "k", label: "GitHub Commits" },
+    { value: 22, label: "Client Projects Delivered" },
+    { value: 6, label: "SaaS Dashboards Designed" },
+    { value: 12, label: "Technologies Mastered" },
   ];
 
-  const { ref, inView } = useInView({
-    triggerOnce: false,
-    threshold: 0.5,
-  });
-
   return (
-    <div className="relative py-20">
+    <section
+      ref={ref}
+      className="relative py-24 bg-white dark:bg-[#051504] transition-colors"
+    >
+      {/* Soft Glow Effect */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
-        className="absolute inset-0 bg-gradient-to-br from-purple-800/20 to-blue-800/20 blur-3xl"
+        className="absolute inset-0 bg-gradient-to-br from-green-200/10 to-blue-300/10 blur-2xl z-0"
       />
-      
-      <div
-        ref={ref}
-        className="container mx-auto flex flex-wrap justify-center lg:justify-between items-center gap-10 px-5 lg:px-20 relative z-10"
-      >
+
+      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 text-center">
         {stats.map((stat, index) => (
           <motion.div
             key={index}
-            initial={{ opacity: 0, y: 30, scale: 0.8 }}
-            animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
-            transition={{ duration: 0.6, delay: index * 0.2, ease: "easeOut" }}
-            className="glassmorphism p-6 rounded-xl shadow-lg border border-gray-700 text-center w-56"
+            initial={{ opacity: 0, y: 30, scale: 0.9 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{
+              duration: 0.6,
+              delay: index * 0.2,
+              ease: "easeOut",
+            }}
+            className="bg-white/80 dark:bg-[#0a1a08]/80 border border-gray-200 dark:border-[#1d3a1a] backdrop-blur-xl rounded-2xl px-6 py-8 shadow-xl hover:scale-105 transition-all"
           >
-            <motion.h2
-              initial={{ scale: 0.9 }}
-              animate={inView ? { scale: 1.1 } : {}}
-              transition={{ duration: 0.5, yoyo: Infinity }}
-              className="text-6xl font-extrabold text-white opacity-95"
-            >
-              {inView ? <CountUp end={stat.value} duration={2} /> : "0"}+
-            </motion.h2>
-            <p className="text-lg mt-2 text-gray-300 opacity-80">{stat.label}</p>
+            <h2 className="text-5xl font-bold text-gray-900 dark:text-[#62e847] font-poppins">
+              {inView ? <CountUp end={stat.value} decimals={stat.suffix ? 1 : 0} duration={2} /> : "0"}
+              {stat.suffix || ""}+
+            </h2>
+            <p className="text-sm text-gray-600 dark:text-green-100 mt-2 tracking-wide">
+              {stat.label}
+            </p>
           </motion.div>
         ))}
       </div>
-    </div>
+    </section>
   );
 };
 
