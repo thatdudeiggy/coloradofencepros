@@ -7,8 +7,6 @@ export const Work = () => {
       <div className=''>
         
           <Experiences />
-      <Services />
-
       </div>
   )
 }
