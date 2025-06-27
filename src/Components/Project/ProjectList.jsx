@@ -1,130 +1,113 @@
-import React, { useState } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import { FiExternalLink, FiGithub } from "react-icons/fi";
-import rooflyImage from "../../Assets/roofly.png";
-import joevibeImage from "../../Assets/joevibe.png"; 
-import hoobankImage from "../../Assets/hoobank.png"; 
 
+import rooflyImage from "../../Assets/roofly.png";
+import joevibeImage from "../../Assets/joevibe.png";
+import hoobankImage from "../../Assets/hoobank.png";
+
+// Placeholder project data
 export const projects = [
   {
     id: 1,
     category: "Web Development",
-    title: "Roofly",
-    description: "Roofly is a modern real estate platform for renting and selling properties with an intuitive user experience.",
-    techStack: "React.js, TailwindCSS, Firebase, Node.js, Express.js, and Framer",
+    title: "Project One",
+    description: "A modern platform for showcasing real estate listings with clean UI.",
+    techStack: "React, Tailwind, Firebase, Node.js",
     gif: rooflyImage,
-    liveLink: "https://roofly-livid.vercel.app/",
-    githubLink: "https://github.com/jeylanab/Roofly",
+    liveLink: "#",
+    githubLink: "#",
   },
   {
     id: 2,
     category: "Web Development",
-    title: "JoeVibe",
-    description: "JoeVibe is a feature-rich e-commerce platform offering a seamless shopping experience.",
-    techStack: "JavaScript, HTML5, CSS, React.js, TailwindCSS, Node.js, Express.js, and MongoDB",
+    title: "Project Two",
+    description: "A full-featured eCommerce store with modern UX flows and cart logic.",
+    techStack: "React, Express, MongoDB, Tailwind",
     gif: joevibeImage,
-    liveLink: "https://joevibe.vercel.app/",
-    githubLink: "https://github.com/jeylanab/joeVibe",
+    liveLink: "#",
+    githubLink: "#",
   },
   {
-    id: 3, 
-    category: "Web Development",
-    title: "HooJoe Bank",
-    description: "HoeJoe is a user-friendly landing page for a banking system that showcases an intuitive and modern design.",
-    techStack: "JavaScript, HTML5, CSS, React.js, TailwindCSS, Node.js, Express.js, and MongoDB",
-    gif: hoobankImage, 
-    liveLink: "https://hoojoebank.netlify.app/",
-    githubLink: "https://github.com/jeylanab/JOOBANK",
-  },
-  {
-    id: 4, 
-    category: "Web Development",
-    title: "JoeVibe",
-    description: "JoeVibe is a feature-rich e-commerce platform offering a seamless shopping experience.",
-    techStack: "JavaScript, HTML5, CSS, React.js, TailwindCSS, Node.js, Express.js, and MongoDB",
-    gif: joevibeImage,
-    liveLink: "https://joevibe.vercel.app/",
-    githubLink: "https://github.com/jeylanab/joeVibe",
-  },
-  {
-    id: 5, 
+    id: 3,
     category: "UX Design",
-    title: "JoeVibe",
-    description: "JoeVibe is a feature-rich e-commerce platform offering a seamless shopping experience.",
-    techStack: "JavaScript, HTML5, CSS, React.js, TailwindCSS, Node.js, Express.js, and MongoDB",
-    gif: joevibeImage, 
-    liveLink: "https://joevibe.vercel.app/",
-    githubLink: "https://github.com/jeylanab/joeVibe",
+    title: "Project Three",
+    description: "Landing page UI with an elegant design system tailored for SaaS.",
+    techStack: "HTML, CSS, JS, Tailwind",
+    gif: hoobankImage,
+    liveLink: "#",
+    githubLink: "#",
+  },
+    {
+    id: 3,
+    category: "UX Design",
+    title: "Project Three",
+    description: "Landing page UI with an elegant design system tailored for SaaS.",
+    techStack: "HTML, CSS, JS, Tailwind",
+    gif: hoobankImage,
+    liveLink: "#",
+    githubLink: "#",
   },
 ];
 
-const categories = ["All", "Web Development", "UX Design", "Software Development"];
-
 const ProjectList = () => {
-  const [selectedCategory, setSelectedCategory] = useState("All");
-
-  const filteredProjects = selectedCategory === "All"
-    ? projects
-    : projects.filter(project => project.category === selectedCategory);
-
   return (
-    <motion.div 
-      className="w-full max-w-6xl mx-auto p-6 text-white flex my-24 flex-col font-mono gap-12"
+    <motion.div
+      className="w-full max-w-6xl mx-auto px-6 py-28  flex flex-col gap-12 font-mono"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 2 }}
     >
-      {/* Category Buttons */}
-      <div className="flex flex-wrap justify-center gap-4 mb-6 max-w-xs mx-auto md:max-w-none">
-        {categories.map((category) => (
-          <button
-            key={category}
-            className={`px-4 py-2 rounded-lg md:text-sm text-white lg:text-lg xl:text-md text-xs font-semibold border border-gray-400 ${
-              selectedCategory === category ? "bg-[#2dda0a] text-black" : "text-gray-300"
-            } hover:opacity-90 hover:text-white transition`}
-            onClick={() => setSelectedCategory(category)}
-          >
-            {category}
-          </button>
-        ))}
-      </div>
+      <h2 className="text-2xl md:text-3xl font-bold text-center mt-4 text-[#2dda0a] tracking-tight">
+        Featured Projects
+      </h2>
 
-      {/* Projects */}
-      {filteredProjects.map((project, index) => (
+      {projects.map((project, index) => (
         <motion.div
           key={project.id}
-          className={`flex flex-col md:flex-row items-center border-t-2 py-4 md:p-0 gap-6 ${index % 2 === 0 ? 'md:flex-row-reverse' : ''}`}
+          className={`flex flex-col md:flex-row items-center border-t border-gray-800 pt-10 gap-8 ${
+            index % 2 === 0 ? "md:flex-row-reverse" : ""
+          }`}
           initial={{ y: 50, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
-          transition={{ duration: 1.8 }}
-          viewport={{ infinity: true }}
+          transition={{ duration: 1.5 }}
+          viewport={{ once: true }}
         >
-          <div className="md:w-1/2 text-left">
-            <span className="text-md font-semibold px-3 py-1 rounded-md border border-gray-400 text-white">
+          {/* Text Content */}
+          <div className="md:w-1/2 text-left space-y-3">
+            <span className="text-lg px-3 py-1 rounded border border-green-500 text-green-400 font-medium tracking-wide">
               {project.category}
             </span>
-            <h3 className="text-3xl font-bold mt-3 mb-4">{project.title}</h3>
-            <p className="text-black text-sm mb-4">{project.description}</p>
-            <p className="text-black text-sm font-semibold">{project.techStack}</p>
-            <div className="flex items-center gap-4 mt-4">
-              {project.liveLink && (
-                <a href={project.liveLink} target="_blank" rel="noopener noreferrer" className="text-white hover:text-green-400">
-                  <FiExternalLink size={24} />
-                </a>
-              )}
-              {project.githubLink && (
-                <a href={project.githubLink} target="_blank" rel="noopener noreferrer" className="text-white hover:text-green-400">
-                  <FiGithub size={24} />
-                </a>
-              )}
+            <h3 className="text-3xl font-bold text-white">{project.title}</h3>
+            <p className="dark:text-gray-300 text-sm">{project.description}</p>
+            <p className="text-gray-400 text-lg font-mono">{project.techStack}</p>
+            <div className="flex items-center gap-4 mt-2">
+              <a
+                href={project.liveLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="dark:text-white font-extrabold hover:text-green-400"
+              >
+                <FiExternalLink size={20} />
+              </a>
+              <a
+                href={project.githubLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="dark:text-white font-extrabold hover:text-green-400"
+              >
+                <FiGithub size={20} />
+              </a>
             </div>
           </div>
+
+          {/* Image */}
           <div className="md:w-1/2 flex justify-center">
-            <motion.img 
-              src={project.gif} // Using normal image
-              alt={project.title} 
-              className="rounded-md shadow-lg w-full max-h-64 object-cover" 
-              initial={{ scale: 0.9 }}
+            <motion.img
+              src={project.gif}
+              alt={project.title}
+              className="rounded-lg w-full max-h-64 object-cover shadow-lg"
+              initial={{ scale: 0.95 }}
               whileInView={{ scale: 1 }}
               transition={{ duration: 0.5 }}
               viewport={{ once: true }}
