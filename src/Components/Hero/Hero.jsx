@@ -107,7 +107,7 @@ export const Hero = () => {
     <img
       src={profile}
       alt="Jane Doe"
-      className="w-72 shadow-none sm:w-96 lg:w-[460px] rounded-2xl object-cover shadow-xl"
+      className="w-72 shadow-none sm:w-96 lg:w-[460px] object-cover"
     />
     <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 text-black text-xs sm:text-sm px-4 py-1 rounded-full font-semibold shadow-md bg-white">
       UI/UX Portfolio 2025
