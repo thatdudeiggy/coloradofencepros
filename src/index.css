@@ -2,41 +2,58 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
-*{
+/* Import custom font */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&display=swap');
+
+/* RESET + GLOBAL */
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
+
 :root {
-  --primary-color: #fff;
-  --secondary-color:rgba(0, 0, 0, 0.981);
+  --primary-color: #ffffff;
+  --secondary-color: rgba(0, 0, 0, 0.98);
   --tertiary-color: #62e847;
   --other-color: #0d0d0d;
-  --primary-font-family: "Oswald", serif;;
+  --primary-font-family: 'Montserrat', sans-serif;
   --spacing-unit: 1rem;
   --border-radius: 8px;
-
-}
-.montserrat-large {
-  font-family: "Montserrat", serif;
-
+  --background-image: url("data:image/svg+xml,%3Csvg ... (your full image stays)%3C/svg%3E");
 }
 
-
+/* Body styles - LIGHT MODE DEFAULT */
 body {
-  background-color: #f0fcf2; /* Deep black background */
-  color: #EDEDED;            /* Light text */
+  background-color: var(--primary-color);
+  background-image: var(--background-image);
+  color: #111; /* Safe dark text */
+  font-family: var(--primary-font-family);
+  transition: all 0.3s ease;
 }
 
+/* Dark mode override using Tailwind’s 'dark' class */
+body.dark {
+  background-color: #051504;
+  color: var(--primary-color);
+}
 
+/* Font utility */
+.montserrat-large {
+  font-family: 'Montserrat', sans-serif;
+}
 
-.button-primary:hover{
+/* Custom button style */
+.button-primary {
+  background-color: var(--tertiary-color);
+  color: black;
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: var(--border-radius);
+  transition: all 0.3s ease;
+}
+.button-primary:hover {
   background-color: #3eff12;
-  padding: 5px 10px;
-  border-radius: 5px;
-  font-size: 1.2rem;
+  transform: scale(1.05);
   cursor: pointer;
-  transition: all 0.3s;
 }
-
