@@ -1,8 +1,23 @@
-# React + Vite
+# Minimal React Portfolio Template
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+🔥 A sleek, modern, and mobile-first developer portfolio built with React, Tailwind CSS & Framer Motion. Perfect for UI/UX designers and frontend devs.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- 🌗 Dark mode support
+- ⚡ Framer Motion animations
+- 🔌 Easy content customization
+- 📱 Fully responsive
+- 💼 Project showcase section
+
+## Demo
+
+🔗 Live Demo: [your-site.vercel.app](https://portfolioforsell.netlify.app)
+
+## Installation
+
+```bash
+git clone https://github.com/jeylanab/portfolio-template.git
+cd portfolio-template
+npm install
+npm run dev

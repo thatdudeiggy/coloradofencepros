@@ -7,15 +7,35 @@ import {
 } from "react-icons/fa";
 import { motion } from "framer-motion";
 
+// =====================
+// Footer Content Object
+// =====================
+const footerContent = {
+  branding: {
+    name: "Jane Smith",
+    description:
+      "UI/UX Designer crafting user-centric, responsive web applications with modern UI and clean design.",
+  },
+  links: ["Home", "About", "Projects", "Contact"],
+  socials: [
+    { icon: <FaGithub />, link: "https://github.com/janesmith" },
+    { icon: <FaLinkedin />, link: "https://linkedin.com/in/janesmith" },
+    { icon: <FaTwitter />, link: "https://x.com/janesmith" },
+    { icon: <FaInstagram />, link: "https://instagram.com/your-profile" },
+  ],
+  copyright:
+    "© " + new Date().getFullYear() + " Jane Smith. All rights reserved.",
+};
+
 const Footer = () => {
   return (
     <motion.footer
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
-      className="relative py-16 px-6 md:px-20 text-gray-900 dark:text-green-100"
+      className="relative py-16 px-6 md:px-20 text-gray-900 dark:text-green-100 bg-transparent"
     >
-      {/* Glow Effect */}
+      {/* Glow Background */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -23,24 +43,23 @@ const Footer = () => {
         className="absolute inset-0 bg-gradient-to-br from-green-200/10 to-blue-300/10 blur-2xl z-0"
       />
 
-      <div className="relative z-10 max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 items-start">
+      {/* Grid Layout */}
+      <div className="relative z-10 max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 sm:gap-12">
         {/* Branding */}
         <div>
-          <h2 className="text-2xl font-semibold text-green-500 font-poppins mb-2">
-            Your Name
+          <h2 className="text-2xl font-bold text-green-500 font-poppins mb-3">
+            {footerContent.branding.name}
           </h2>
-          <p className="text-sm leading-relaxed text-gray-600 dark:text-green-200">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          <p className="text-sm text-gray-700 dark:text-green-200 leading-relaxed">
+            {footerContent.branding.description}
           </p>
         </div>
 
         {/* Quick Links */}
         <div>
-          <h3 className="text-lg font-semibold text-green-400 mb-3">
-            Quick Links
-          </h3>
+          <h3 className="text-lg font-semibold text-green-400 mb-4">Quick Links</h3>
           <ul className="text-sm space-y-2">
-            {["Home", "About", "Projects", "Contact"].map((link) => (
+            {footerContent.links.map((link) => (
               <li key={link}>
                 <a
                   href={`/${link.toLowerCase()}`}
@@ -53,18 +72,11 @@ const Footer = () => {
           </ul>
         </div>
 
-        {/* Socials */}
+        {/* Social Icons */}
         <div>
-          <h3 className="text-lg font-semibold text-green-400 mb-3">
-            Follow Me
-          </h3>
-          <div className="flex gap-6 text-2xl mt-2">
-            {[
-              { icon: <FaGithub />, link: "https://github.com/jeylanab" },
-              { icon: <FaLinkedin />, link: "https://linkedin.com/in/jeylan-tesi-53a746257" },
-              { icon: <FaTwitter />, link: "https://x.com/jetu81" },
-              { icon: <FaInstagram />, link: "https://instagram.com/your-profile" },
-            ].map((social, index) => (
+          <h3 className="text-lg font-semibold text-green-400 mb-4">Follow Me</h3>
+          <div className="flex flex-wrap gap-4 text-2xl mt-2">
+            {footerContent.socials.map((social, index) => (
               <motion.a
                 key={index}
                 href={social.link}
@@ -80,9 +92,9 @@ const Footer = () => {
         </div>
       </div>
 
-      {/* Bottom */}
+      {/* Footer Bottom */}
       <div className="relative z-10 mt-12 text-center text-sm text-gray-500 dark:text-green-200">
-        © {new Date().getFullYear()} Jeylan Tesi. All rights reserved.
+        {footerContent.copyright}
       </div>
     </motion.footer>
   );

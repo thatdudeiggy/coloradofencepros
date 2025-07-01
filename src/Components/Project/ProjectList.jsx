@@ -2,9 +2,9 @@ import React from "react";
 import { motion } from "framer-motion";
 import { FiExternalLink, FiGithub } from "react-icons/fi";
 
-import rooflyImage from "../../Assets/roofly.png";
-import joevibeImage from "../../Assets/joevibe.png";
-import hoobankImage from "../../Assets/hoobank.png";
+import one from "../../Assets/25.jpg";
+import two from "../../Assets/26.jpg";
+import three from "../../Assets/27.jpg";
 
 // Placeholder project data
 export const projects = [
@@ -14,7 +14,7 @@ export const projects = [
     title: "Project One",
     description: "A modern platform for showcasing real estate listings with clean UI.",
     techStack: "React, Tailwind, Firebase, Node.js",
-    gif: rooflyImage,
+    gif: one,
     liveLink: "#",
     githubLink: "#",
   },
@@ -24,7 +24,7 @@ export const projects = [
     title: "Project Two",
     description: "A full-featured eCommerce store with modern UX flows and cart logic.",
     techStack: "React, Express, MongoDB, Tailwind",
-    gif: joevibeImage,
+    gif: two,
     liveLink: "#",
     githubLink: "#",
   },
@@ -34,7 +34,7 @@ export const projects = [
     title: "Project Three",
     description: "Landing page UI with an elegant design system tailored for SaaS.",
     techStack: "HTML, CSS, JS, Tailwind",
-    gif: hoobankImage,
+    gif: three,
     liveLink: "#",
     githubLink: "#",
   },
@@ -44,7 +44,7 @@ export const projects = [
     title: "Project Three",
     description: "Landing page UI with an elegant design system tailored for SaaS.",
     techStack: "HTML, CSS, JS, Tailwind",
-    gif: hoobankImage,
+    gif: three,
     liveLink: "#",
     githubLink: "#",
   },
@@ -78,7 +78,7 @@ const ProjectList = () => {
             <span className="text-lg px-3 py-1 rounded border border-green-500 text-green-400 font-medium tracking-wide">
               {project.category}
             </span>
-            <h3 className="text-3xl font-bold text-white">{project.title}</h3>
+            <h3 className="text-3xl font-bold text-green-600">{project.title}</h3>
             <p className="dark:text-gray-300 text-md">{project.description}</p>
             <p className="text-gray-400 text-lg font-mono">{project.techStack}</p>
             <div className="flex items-center gap-4 mt-2">

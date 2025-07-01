@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { FaLinkedin, FaTwitter, FaGithub, FaInstagram } from 'react-icons/fa';
 import profile from '../../Assets/pic.png';
-import joecv from '../../Assets/joecv.pdf';
+import cv from '../../Assets/template.pdf';
 
 // Animation Variants
 const containerVariants = {
@@ -25,14 +25,14 @@ const itemVariants = {
 // Hero Section Content
 const heroData = {
   greeting: '👋 Hello',
-  name: 'Your Name',
+  name: 'Jane Smith',
   title: 'UI/UX Designer',
   description:
     'I design stunning, user-focused interfaces for websites and digital products. Clean aesthetics meet strategic UX.',
   badgeText: 'UI/UX Portfolio 2025',
   ctaExplore: 'Explore',
   ctaDownload: 'Download CV',
-  cvFile: joecv,
+  cvFile: cv,
   socialLinks: [
     { icon: FaLinkedin, url: 'https://www.linkedin.com/in/jeylan-tesi-53a746257/' },
     { icon: FaTwitter, url: 'https://x.com/jetu81' },
