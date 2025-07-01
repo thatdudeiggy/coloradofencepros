@@ -16,7 +16,7 @@ const Stats = () => {
   return (
     <section
       ref={ref}
-      className="relative py-16 bg-white dark:bg-[#051504] transition-colors"
+      className="relative py-16 transition-colors"
     >
       {/* Soft Glow Background */}
       <motion.div

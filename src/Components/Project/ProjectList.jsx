@@ -79,7 +79,7 @@ const ProjectList = () => {
               {project.category}
             </span>
             <h3 className="text-3xl font-bold text-white">{project.title}</h3>
-            <p className="dark:text-gray-300 text-sm">{project.description}</p>
+            <p className="dark:text-gray-300 text-md">{project.description}</p>
             <p className="text-gray-400 text-lg font-mono">{project.techStack}</p>
             <div className="flex items-center gap-4 mt-2">
               <a

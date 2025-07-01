@@ -13,7 +13,7 @@ const Footer = () => {
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
-      className="relative bg-white dark:bg-[#051504] py-16 px-6 md:px-20 text-gray-900 dark:text-green-100"
+      className="relative py-16 px-6 md:px-20 text-gray-900 dark:text-green-100"
     >
       {/* Glow Effect */}
       <motion.div
@@ -27,11 +27,10 @@ const Footer = () => {
         {/* Branding */}
         <div>
           <h2 className="text-2xl font-semibold text-green-500 font-poppins mb-2">
-            Jeylan Tesi
+            Your Name
           </h2>
           <p className="text-sm leading-relaxed text-gray-600 dark:text-green-200">
-            UI/UX Designer & Full Stack Developer <br />
-            Based in Ethiopia 🌍
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
           </p>
         </div>
 

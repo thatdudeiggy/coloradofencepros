@@ -4,6 +4,7 @@ import { FaLinkedin, FaTwitter, FaGithub, FaInstagram } from 'react-icons/fa';
 import profile from '../../Assets/pic.png';
 import joecv from '../../Assets/joecv.pdf';
 
+// Animation Variants
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
@@ -21,12 +22,24 @@ const itemVariants = {
   visible: { opacity: 1, y: 0 },
 };
 
-const socialLinks = [
-  { icon: FaLinkedin, url: 'https://www.linkedin.com/in/jeylan-tesi-53a746257/' },
-  { icon: FaTwitter, url: 'https://x.com/jetu81' },
-  { icon: FaGithub, url: 'https://github.com/jeylanab/' },
-  { icon: FaInstagram, url: 'https://www.instagram.com/your-profile' },
-];
+// Hero Section Content
+const heroData = {
+  greeting: '👋 Hello',
+  name: 'Your Name',
+  title: 'UI/UX Designer',
+  description:
+    'I design stunning, user-focused interfaces for websites and digital products. Clean aesthetics meet strategic UX.',
+  badgeText: 'UI/UX Portfolio 2025',
+  ctaExplore: 'Explore',
+  ctaDownload: 'Download CV',
+  cvFile: joecv,
+  socialLinks: [
+    { icon: FaLinkedin, url: 'https://www.linkedin.com/in/jeylan-tesi-53a746257/' },
+    { icon: FaTwitter, url: 'https://x.com/jetu81' },
+    { icon: FaGithub, url: 'https://github.com/jeylanab/' },
+    { icon: FaInstagram, url: 'https://www.instagram.com/your-profile' },
+  ],
+};
 
 export const Hero = () => {
   return (
@@ -44,17 +57,17 @@ export const Hero = () => {
           variants={itemVariants}
         >
           <p className="uppercase tracking-widest text-base sm:text-lg font-medium text-gray-800 dark:text-gray-300">
-            👋 Hello
+            {heroData.greeting}
           </p>
 
-          <h1 className="text-4xl sm:text-6xl font-extrabold leading-tight">
-            I'm <span className="text-green-400 font-poppins">Jane Doe</span>
+          <h1 className="text-4xl sm:text-6xl leading-tight">
+            I'm <span className="text-green-400 font-poppins">{heroData.name}</span>
             <br />
-            UI/UX Designer
+            {heroData.title}
           </h1>
 
           <p className="text-gray-700 dark:text-gray-300 text-sm sm:text-xl max-w-md mx-auto lg:mx-0 leading-relaxed">
-            I design stunning, user-focused interfaces for websites and digital products. Clean aesthetics meet strategic UX.
+            {heroData.description}
           </p>
 
           {/* CTA Buttons */}
@@ -64,21 +77,21 @@ export const Hero = () => {
               whileHover={{ scale: 1.05 }}
               className="bg-green-500 text-black px-7 py-3.5 rounded-md font-semibold text-base sm:text-lg shadow-md hover:bg-green-600 transition"
             >
-              Explore
+              {heroData.ctaExplore}
             </motion.a>
             <motion.a
-              href={joecv}
+              href={heroData.cvFile}
               download
               whileHover={{ scale: 1.05 }}
               className="border border-green-400 px-7 py-3.5 rounded-md font-semibold text-green-500 hover:bg-green-500 hover:text-black transition text-base sm:text-lg"
             >
-              Download CV
+              {heroData.ctaDownload}
             </motion.a>
           </div>
 
           {/* Social Icons */}
           <div className="flex justify-center lg:justify-start gap-6 pt-6">
-            {socialLinks.map(({ icon: Icon, url }, i) => (
+            {heroData.socialLinks.map(({ icon: Icon, url }, i) => (
               <a
                 key={i}
                 href={url}
@@ -105,11 +118,11 @@ export const Hero = () => {
           <div className="relative z-10 -mt-28 sm:-mt-36 lg:-mt-52 lg:mr-4">
             <img
               src={profile}
-              alt="Jane Doe"
+              alt={heroData.name}
               className="w-72 sm:w-96 lg:w-[460px] object-cover"
             />
             <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 text-black dark:text-white text-xs sm:text-sm px-4 py-1 rounded-full font-semibold shadow-md bg-white dark:bg-[#1e293b]">
-              UI/UX Portfolio 2025
+              {heroData.badgeText}
             </div>
           </div>
         </motion.div>
