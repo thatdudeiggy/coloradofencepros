@@ -133,7 +133,7 @@ const FooterLeadForm = ({ estimate, linearFeet, gateWidth, includeTopCap, includ
               </p>
               <button
                 type="submit"
-                className="bg-green-600 text-white px-6 py-3 rounded-full hover:bg-green-700 transition-all duration-300 shadow-md"
+                className="bg-black text-white px-6 py-3 rounded-full hover:bg-green-700 transition-all duration-300 shadow-md"
               >
                 Send Estimate
               </button>

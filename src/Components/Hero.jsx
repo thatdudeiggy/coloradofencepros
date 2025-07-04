@@ -7,11 +7,11 @@ import fence3 from "../assets/fence3.svg";
 
 const Hero = () => {
   return (
-    <section className=" overflow-hidden">
+    <section className=" mx-6 overflow-hidden">
       <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 items-center gap-12 relative">
         {/* Left Side Text */}
         <div className="text-center md:text-left z-10">
-          <h1 className="text-4xl md:text-5xl font-bold text-green-500 mb-6">
+          <h1 className="text-4xl md:text-5xl font-bold  text-green-500 mb-6" style={{ textShadow: "2px 2px 4px rgba(0,0,0,0.3)" }}>
             Get an Instant Fence Estimate Online
           </h1>
           <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-8">
