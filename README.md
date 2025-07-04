@@ -1,23 +1,23 @@
-# Minimal React Portfolio Template
+# Fence Estimate Tool 
 
-🔥 A sleek, modern, and mobile-first developer portfolio built with React, Tailwind CSS & Framer Motion. Perfect for UI/UX designers and frontend devs.
+This is a simple web-based tool that allows users to estimate the cost of fencing an area based on dimensions, measurement method (area or perimeter), and optional gate inputs.
 
 ## Features
 
-- 🌗 Dark mode support
-- ⚡ Framer Motion animations
-- 🔌 Easy content customization
-- 📱 Fully responsive
-- 💼 Project showcase section
+- Select between area or perimeter estimation
+- Input length, width, and height
+- Optional gate selection
+- Instant cost calculation
+- Clean and responsive UI (built with React & Tailwind CSS)
 
-## Demo
+## Tech Stack
 
-🔗 Live Demo: [your-site.vercel.app](https://portfolioforsell.netlify.app)
+- React.js
+- Tailwind CSS
+- EmailJS (for lead capture or email estimate - optional)
 
-## Installation
+## Getting Started
 
-```bash
-git clone https://github.com/jeylanab/portfolio-template.git
-cd portfolio-template
-npm install
-npm run dev
+1. Clone the repo
+2. Run `npm install`
+3. Run `npm run dev` to start the local server
