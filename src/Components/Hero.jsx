@@ -6,6 +6,8 @@ import fence2 from "../assets/fence2.svg";
 import fence3 from "../assets/fence3.svg";
 
 const Hero = () => {
+
+
   return (
     <section className=" mx-6 overflow-hidden">
       <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 items-center gap-12 relative">

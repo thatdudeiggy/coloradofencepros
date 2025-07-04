@@ -45,8 +45,8 @@ const FooterLeadForm = ({ estimate, linearFeet, gateWidth, includeTopCap, includ
   };
 
   return (
-    <footer className="w-full bg-gray-100 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 py-12 px-6 md:px-20">
-      <ToastContainer /> {/* Include Toast messages */}
+    <footer id="contact" className="w-full bg-gray-100 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 py-12 px-6 md:px-20">
+      <ToastContainer />
       <div className="max-w-7xl mx-auto">
         <h2 className="text-center text-2xl md:text-3xl font-semibold text-gray-900 dark:text-white mb-8">
           Request a Free Estimate
@@ -61,7 +61,7 @@ const FooterLeadForm = ({ estimate, linearFeet, gateWidth, includeTopCap, includ
             action="https://formspree.io/f/meokdnyw"
             method="POST"
             onSubmit={handleSubmit}
-            className="grid grid-cols-1 md:grid-cols-3 gap-6 bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-xl"
+            className="grid grid-cols-1 md:grid-cols-3 gap-6 bg-white dark:bg-gray-800 p-6 rounded-2xl "
           >
             {/* Hidden Estimate Data Fields */}
             <input type="hidden" name="estimate" value={`$${estimate || 0}`} />
