@@ -1,34 +1,21 @@
-import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import React, { Component } from 'react'
+import ReactDOM from 'react-dom/client'
+import Navbar from './Components/NavBar'
+import Hero from './Components/Hero'
+import FenceEstimator from './Components/FenceEstimator'
+import LeadCaptureForm from './Components/LeadCaptureForm'
+import './index.css'
 
-import { Navbar } from "./Components/Navbar/Navbar";
-import { Home } from "./Pages/Home";
-import { Work } from "./Pages/Work";
-import Info from "./Pages/Info";
-import Project from "./Pages/Project";
-import Footer from "./Components/Footer/Footer";
-
-const App = () => {
-  return (
-    <Router>
-      <div
-        className="min-h-screen dark:bg-[#051504] font-mono bg-cover bg-no-repeat"
-      >
+export default class App extends Component {
+  render() {
+    return (
+      <div>
         <Navbar />
-
-        <main className=" ">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/services" element={<Work />} />
-            <Route path="/contact" element={<Info />} />
-            <Route path="/projects" element={<Project />} />
-          </Routes>
-        </main>
-
-        <Footer />
+        <Hero />
+        <FenceEstimator />
+        <LeadCaptureForm />
       </div>
-    </Router>
-  );
-};
+    )
+  }
+}
 
-export default App;
