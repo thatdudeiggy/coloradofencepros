@@ -1,85 +1,96 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useState } from "react";
+import {
+  GoogleMap,
+  LoadScript,
+  Marker,
+  Polyline,
+  Autocomplete,
+} from "@react-google-maps/api";
+
+// Map container style
+const containerStyle = {
+  width: "100%",
+  height: "400px",
+};
+
+// Default map center (Downtown Colorado Springs, CO)
+const defaultCenter = {
+  lat: 38.8339,
+  lng: -104.8214,
+};
 
 const GoogleMapMeasure = ({ onDistanceCalculated }) => {
-  const mapRef = useRef(null);
-  const mapInstance = useRef(null);
-  const drawingManager = useRef(null);
-  const polyline = useRef(null);
+  const [path, setPath] = useState([]);
+  const [mapCenter, setMapCenter] = useState(defaultCenter);
+  const autocompleteRef = useRef(null);
 
-  useEffect(() => {
-    // Load the Maps script with Drawing library
-    const loadGoogleMaps = () => {
-      if (!window.google) {
-        const script = document.createElement("script");
-        script.src = `https://maps.googleapis.com/maps/api/js?key=${import.meta.env.VITE_GOOGLE_MAPS_API_KEY}&libraries=drawing`;
-        script.async = true;
-        script.onload = initMap;
-        document.head.appendChild(script);
-      } else {
-        initMap();
-      }
-    };
+  // Add points to path on map click
+  const handleMapClick = (event) => {
+    const newPath = [...path, { lat: event.latLng.lat(), lng: event.latLng.lng() }];
+    setPath(newPath);
 
-    const initMap = () => {
-      mapInstance.current = new window.google.maps.Map(mapRef.current, {
-        center: { lat: 37.7749, lng: -122.4194 },
-        zoom: 14,
-      });
-
-      drawingManager.current = new window.google.maps.drawing.DrawingManager({
-        drawingMode: window.google.maps.drawing.OverlayType.POLYLINE,
-        drawingControl: true,
-        drawingControlOptions: {
-          position: window.google.maps.ControlPosition.TOP_CENTER,
-          drawingModes: [window.google.maps.drawing.OverlayType.POLYLINE],
-        },
-        polylineOptions: {
-          strokeColor: "#2dda0a",
-          strokeWeight: 4,
-        },
-      });
-
-      drawingManager.current.setMap(mapInstance.current);
-
-      window.google.maps.event.addListener(
-        drawingManager.current,
-        "polylinecomplete",
-        (line) => {
-          if (polyline.current) {
-            polyline.current.setMap(null);
-          }
-
-          polyline.current = line;
-
-          const path = line.getPath();
-          let totalDistance = 0;
-
-          for (let i = 0; i < path.getLength() - 1; i++) {
-            const point1 = path.getAt(i);
-            const point2 = path.getAt(i + 1);
-            totalDistance += window.google.maps.geometry.spherical.computeDistanceBetween(point1, point2);
-          }
-
-          const feet = (totalDistance * 3.28084).toFixed(2);
-          onDistanceCalculated(parseFloat(feet));
-        }
+    if (newPath.length > 1) {
+      const distanceInMeters = window.google.maps.geometry.spherical.computeLength(
+        newPath.map((point) => new window.google.maps.LatLng(point.lat, point.lng))
       );
-    };
+      const distanceInFeet = distanceInMeters * 3.28084;
+      onDistanceCalculated(parseFloat(distanceInFeet.toFixed(2)));
+    }
+  };
 
-    loadGoogleMaps();
-  }, [onDistanceCalculated]);
+  // Move map center when a place is searched
+  const onPlaceChanged = () => {
+    const place = autocompleteRef.current.getPlace();
+    if (place.geometry && place.geometry.location) {
+      setMapCenter({
+        lat: place.geometry.location.lat(),
+        lng: place.geometry.location.lng(),
+      });
+    }
+  };
 
   return (
-    <div className="mt-12">
-      <div className="mb-6"> 
-            <h3 className="text-xl font-semibold text-start  text-green-500">
-        Measure your fence directly on the map
-      </h3>
-      <p className="text-gray-600">Add points to draw the boundary.</p>
+    <LoadScript
+      googleMapsApiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}
+      libraries={["places", "geometry"]}
+    >
+      {/* Address search bar */}
+      <div className="mb-4">
+        <Autocomplete
+          onLoad={(ref) => (autocompleteRef.current = ref)}
+          onPlaceChanged={onPlaceChanged}
+        >
+          <input
+            type="text"
+            placeholder="Search your address"
+            className="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 dark:bg-gray-800 dark:text-white"
+          />
+        </Autocomplete>
       </div>
 
-      <div className="w-full h-[400px] rounded-xl overflow-hidden shadow-lg" ref={mapRef}></div>
-    </div>
+      {/* Interactive map */}
+      <GoogleMap
+        mapContainerStyle={containerStyle}
+        center={mapCenter}
+        zoom={14}
+        onClick={handleMapClick}
+      >
+        {path.map((point, index) => (
+          <Marker key={index} position={point} />
+        ))}
+
+        {path.length > 1 && (
+          <Polyline
+            path={path}
+            options={{
+              strokeColor: "#00C853",
+              strokeOpacity: 0.8,
+              strokeWeight: 3,
+            }}
+          />
+        )}
+      </GoogleMap>
+    </LoadScript>
   );
 };
 

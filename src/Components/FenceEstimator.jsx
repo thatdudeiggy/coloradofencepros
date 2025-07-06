@@ -12,6 +12,7 @@ const FenceEstimator = () => {
   const [estimate, setEstimate] = useState(null);
   const [useMap, setUseMap] = useState(false);
   const [mapReady, setMapReady] = useState(false);
+  const [resetMap, setResetMap] = useState(false);
 
   const PRICE_PER_FOOT = 55;
   const TOP_CAP_COST = 5;
@@ -34,13 +35,12 @@ const FenceEstimator = () => {
     setIncludeBoardOnBoard(false);
     setEstimate(null);
     setMapReady(false);
+    setResetMap(true); // Tell the map to reset
   };
 
   return (
     <section id="estimator" className="py-16 px-4 md:px-10 max-w-7xl mx-auto">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-stretch">
-
-        {/* Banner Image */}
         <div className="relative rounded-xl overflow-hidden shadow-xl">
           <img src={cedarFenceImg} alt="Cedar Fence" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center text-white p-6">
@@ -53,16 +53,13 @@ const FenceEstimator = () => {
           </div>
         </div>
 
-        {/* Estimator Form */}
         <div className="space-y-6">
-          {/* Toggle Input Mode */}
           <div className="space-y-2">
             <p className="text-lg font-semibold text-gray-700 dark:text-gray-200">
               Select Measurement Method
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <button
-                type="button"
                 onClick={() => {
                   setUseMap(false);
                   setMapReady(false);
@@ -76,7 +73,6 @@ const FenceEstimator = () => {
                 Manual Input
               </button>
               <button
-                type="button"
                 onClick={() => {
                   setUseMap(true);
                   setMapReady(false);
@@ -92,34 +88,32 @@ const FenceEstimator = () => {
             </div>
           </div>
 
-          {/* Manual Input */}
           {!useMap && (
             <div>
-              <label className="block text-gray-700 dark:text-gray-300 text-md mb-1">
+              <label className="block text-gray-700 dark:text-gray-300 mb-1">
                 Enter Linear Footage (ft)
               </label>
               <input
                 type="number"
-                min="0"
                 value={linearFeet}
                 onChange={(e) => setLinearFeet(Number(e.target.value))}
-                className="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 dark:bg-gray-800 dark:text-white"
+                className="w-full p-3 rounded-lg border border-gray-300 focus:ring-green-500 focus:outline-none dark:bg-gray-800 dark:text-white"
                 placeholder="e.g. 120"
               />
             </div>
           )}
 
-          {/* Google Map Input */}
           {useMap && (
             <GoogleMapMeasure
               onDistanceCalculated={(feet) => {
-                setLinearFeet(feet);
+                setLinearFeet(Number(feet));
                 setMapReady(true);
               }}
+              resetTrigger={resetMap}
+              onResetHandled={() => setResetMap(false)}
             />
           )}
 
-          {/* Add-ons */}
           <div className="grid grid-cols-1 gap-4">
             <div className="flex items-center gap-3">
               <input
@@ -138,10 +132,9 @@ const FenceEstimator = () => {
                 </label>
                 <input
                   type="number"
-                  min="0"
                   value={gateWidth}
                   onChange={(e) => setGateWidth(Number(e.target.value))}
-                  className="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 dark:bg-gray-800 dark:text-white"
+                  className="w-full p-3 rounded-lg border border-gray-300 dark:bg-gray-800 dark:text-white"
                   placeholder="e.g. 4"
                 />
               </div>
@@ -168,12 +161,11 @@ const FenceEstimator = () => {
             </div>
           </div>
 
-          {/* Estimate / Clear Buttons */}
           <div className="flex flex-wrap justify-center gap-4 mt-4">
             {(!useMap || mapReady) ? (
               <button
                 onClick={handleEstimate}
-                className="bg-green-600 text-white px-6 py-3 rounded-full hover:bg-green-700 transition-all duration-300 shadow-md"
+                className="bg-green-600 text-white px-6 py-3 rounded-full hover:bg-green-700 shadow-md transition-all duration-300"
               >
                 Calculate Estimate
               </button>
@@ -193,7 +185,6 @@ const FenceEstimator = () => {
             )}
           </div>
 
-          {/* Estimate Display */}
           <AnimatePresence>
             {estimate !== null && (
               <motion.div
@@ -208,71 +199,6 @@ const FenceEstimator = () => {
               </motion.div>
             )}
           </AnimatePresence>
-
-          {/* Formspree Lead Capture Form */}
-          {estimate !== null && (
-           <form
-  action="https://formspree.io/f/xdkzjjaz"
-  method="POST"
-  className="mt-8 space-y-4"
->
-  <h3 className="text-xl font-semibold text-gray-800 dark:text-white text-center">
-    Get Your Estimate & Quote
-  </h3>
-
-  {/* Actual visible fields */}
-  <input
-    type="text"
-    name="name"
-    required
-    placeholder="Your Name"
-    className="w-full p-3 rounded-lg border border-gray-300 dark:bg-gray-800 dark:text-white"
-  />
-  <input
-    type="email"
-    name="email"
-    required
-    placeholder="you@example.com"
-    className="w-full p-3 rounded-lg border border-gray-300 dark:bg-gray-800 dark:text-white"
-  />
-  <input
-    type="tel"
-    name="phone"
-    placeholder="Phone (optional)"
-    className="w-full p-3 rounded-lg border border-gray-300 dark:bg-gray-800 dark:text-white"
-  />
-
-  {/* Pre-formatted hidden message */}
-  <textarea
-    name="message"
-    hidden
-    value={
-      `🧱 Fence Estimate Summary\n\n` +
-      `📏 Linear Feet: ${linearFeet} ft\n` +
-      `🚪 Gate Included: ${includeGate ? "Yes" : "No"}\n` +
-      (includeGate ? `➡️ Gate Width: ${gateWidth} ft\n` : "") +
-      `🧢 Decorative Top Cap: ${includeTopCap ? "Yes" : "No"}\n` +
-      `🪵 Board-on-Board Design: ${includeBoardOnBoard ? "Yes" : "No"}\n` +
-      `💵 Total Estimate: $${estimate?.toLocaleString()}\n`
-    }
-/>
-
-  <textarea
-    name="extra_notes"
-    placeholder="Any additional message for us?"
-    rows="4"
-    className="w-full p-3 rounded-lg border border-gray-300 dark:bg-gray-800 dark:text-white"
-  ></textarea>
-
-  <button
-    type="submit"
-    className="w-full bg-green-600 text-white px-6 py-3 rounded-full hover:bg-green-700 transition-all duration-300 shadow-md"
-  >
-    Send My Estimate
-  </button>
-</form>
-
-          )}
         </div>
       </div>
     </section>

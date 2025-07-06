@@ -12,8 +12,8 @@
 }
 
 :root {
-  --primary-color: #fffffff5;
-  --secondary-color: rgba(0, 0, 0, 0.98);
+  --primary-color: #fafff8f5;
+  --secondary-color: rgba(7, 23, 2, 0.98);
   --tertiary-color: #62e847;
   --other-color: #0d0d0d;
   --primary-font-family: 'Montserrat', sans-serif;
