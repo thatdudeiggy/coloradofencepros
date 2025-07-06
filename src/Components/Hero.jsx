@@ -1,9 +1,9 @@
 import React from "react";
 import { motion } from "framer-motion";
 
-import fence1 from "../assets/fence1.svg";
-import fence2 from "../assets/fence2.svg";
-import fence3 from "../assets/fence3.svg";
+import fence1 from "../Assets/fence1.svg";
+import fence2 from "../Assets/fence2.svg";
+import fence3 from "../Assets/fence3.svg";
 
 const Hero = () => {
 
