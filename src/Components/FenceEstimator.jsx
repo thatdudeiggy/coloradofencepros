@@ -1,7 +1,30 @@
 import React, { useState } from "react";
-import cedarFenceImg from "../Assets/cedar.svg";
+import {
+  FaMapMarkedAlt,
+  FaRulerCombined,
+  FaCalculator,
+} from "react-icons/fa";
+
 import GoogleMapMeasure from "./GoogleMapMeasure";
-import { motion, AnimatePresence } from "framer-motion";
+import FenceTypeSelector from "./FenceTypeSelector";
+import FenceAddonsPanel from "./FenceAddonsPanel";
+import FenceControls from "./FenceControls";
+import EstimateOutput from "./EstimateOutput";
+import LeadForm from "./LeadForm";
+
+// Fence options
+const FENCE_TYPES = {
+  cedar: { label: "6ft Cedar", price: 55 },
+  splitRail2: { label: "2 Rail Split Rail (Rough Cedar)", price: 50 },
+  splitRail3: { label: "3 Rail Premium Western Cedar", price: 67 },
+  chainLink4: { label: "4ft Chain Link", price: 38 },
+  chainLink7: { label: "7ft Chain Link", price: 45 },
+  steel4: { label: "4ft Steel Ornamental", price: 85 },
+  steel6: { label: "6ft Steel Ornamental", price: 95 },
+};
+
+const TOP_CAP_COST = 5;
+const BOARD_ON_BOARD_COST = 10;
 
 const FenceEstimator = () => {
   const [linearFeet, setLinearFeet] = useState(0);
@@ -13,14 +36,12 @@ const FenceEstimator = () => {
   const [useMap, setUseMap] = useState(false);
   const [mapReady, setMapReady] = useState(false);
   const [resetMap, setResetMap] = useState(false);
-
-  const PRICE_PER_FOOT = 55;
-  const TOP_CAP_COST = 5;
-  const BOARD_ON_BOARD_COST = 10;
+  const [selectedFence, setSelectedFence] = useState("cedar");
 
   const handleEstimate = () => {
-    const base = linearFeet * PRICE_PER_FOOT;
-    const gate = includeGate ? gateWidth * 3 * PRICE_PER_FOOT : 0;
+    const price = FENCE_TYPES[selectedFence].price;
+    const base = linearFeet * price;
+    const gate = includeGate ? gateWidth * 3 * price : 0;
     const topCap = includeTopCap ? linearFeet * TOP_CAP_COST : 0;
     const boardOnBoard = includeBoardOnBoard ? linearFeet * BOARD_ON_BOARD_COST : 0;
     const total = base + gate + topCap + boardOnBoard;
@@ -35,29 +56,38 @@ const FenceEstimator = () => {
     setIncludeBoardOnBoard(false);
     setEstimate(null);
     setMapReady(false);
-    setResetMap(true); // trigger map clear
+    setResetMap(true);
   };
 
   return (
-    <section id="estimator" className="py-16 px-4 md:px-10 max-w-7xl mx-auto">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-stretch">
-        {/* Banner Image */}
-        <div className="relative rounded-xl overflow-hidden shadow-xl">
-          <img src={cedarFenceImg} alt="Cedar Fence" className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center text-white p-6">
-            <h2 className="text-3xl md:text-4xl font-semibold mb-2 text-center">
-              Professional Fence Cost Estimator
-            </h2>
-            <p className="text-md text-gray-300 italic text-center">
-              6ft Cedar | 3-Rail | Steel Posts | $55/ft
-            </p>
-          </div>
-        </div>
+    <section
+      id="estimator"
+      className="w-full bg-gradient-to-tr from-green-700 to-green-500 py-16 relative overflow-hidden"
+    >
+      {/* Fence-style Top Border */}
+      <div className="absolute top-0 left-0 w-full h-8 bg-white dark:bg-gray-900">
+        <svg className="w-full h-full" viewBox="0 0 100 10" preserveAspectRatio="none">
+          <polygon
+            points="0,10 2.5,0 5,10 7.5,0 10,10 12.5,0 15,10 17.5,0 20,10 100,10"
+            fill="white"
+            className="dark:fill-gray-900"
+          />
+        </svg>
+      </div>
 
-        {/* Form + Inputs */}
-        <div className="space-y-6">
-          <div className="space-y-2">
-            <p className="text-lg font-semibold text-gray-700 dark:text-gray-200">
+      {/* Content */}
+      <div className="relative z-10 max-w-5xl mx-auto px-4 md:px-8">
+        <div className="bg-white dark:bg-gray-900 p-6 sm:p-10 rounded-xl shadow-2xl space-y-6">
+
+          {/* Heading */}
+          <h2 className="text-3xl md:text-4xl font-bold text-green-600 flex items-center gap-3">
+            <FaCalculator className="text-green-600" />
+            Fence Cost Estimator
+          </h2>
+
+          {/* Measurement Method */}
+          <div>
+            <p className="text-lg font-semibold text-gray-700 dark:text-gray-200 mb-2">
               Select Measurement Method
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
@@ -66,48 +96,53 @@ const FenceEstimator = () => {
                   setUseMap(false);
                   setMapReady(false);
                 }}
-                className={`px-4 py-2 rounded-lg shadow-sm border transition ${
+                className={`flex items-center gap-2 px-4 py-2 rounded-lg border transition font-medium ${
                   !useMap
                     ? "bg-green-100 border-green-500 text-green-700"
                     : "bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-700 text-gray-800 dark:text-white"
                 }`}
               >
+                <FaRulerCombined />
                 Manual Input
               </button>
+
               <button
                 onClick={() => {
                   setUseMap(true);
                   setMapReady(false);
                 }}
-                className={`px-4 py-2 rounded-lg shadow-sm border transition ${
+                className={`flex items-center gap-2 px-4 py-2 rounded-lg border transition font-medium ${
                   useMap
                     ? "bg-green-100 border-green-500 text-green-700"
                     : "bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-700 text-gray-800 dark:text-white"
                 }`}
               >
+                <FaMapMarkedAlt />
                 Use Google Map
               </button>
             </div>
           </div>
 
-          {/* Manual Input */}
-          {!useMap && (
+          {/* Input Area */}
+          {!useMap ? (
             <div>
-              <label className="block text-gray-700 dark:text-gray-300 mb-1">
+              <label
+                htmlFor="linearFeet"
+                className="block text-gray-700 dark:text-gray-300 mb-1"
+              >
                 Enter Linear Footage (ft)
               </label>
               <input
+                id="linearFeet"
                 type="number"
+                min={0}
                 value={linearFeet}
                 onChange={(e) => setLinearFeet(Number(e.target.value))}
-                className="w-full p-3 rounded-lg border border-gray-300 focus:ring-green-500 focus:outline-none dark:bg-gray-800 dark:text-white"
+                className="w-full p-3 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-500"
                 placeholder="e.g. 120"
               />
             </div>
-          )}
-
-          {/* Map Input */}
-          {useMap && (
+          ) : (
             <GoogleMapMeasure
               onDistanceCalculated={(feet) => {
                 setLinearFeet(Number(feet));
@@ -118,155 +153,49 @@ const FenceEstimator = () => {
             />
           )}
 
-          {/* Addons */}
-          <div className="grid grid-cols-1 gap-4">
-            <div className="flex items-center gap-3">
-              <input
-                type="checkbox"
-                checked={includeGate}
-                onChange={() => setIncludeGate(!includeGate)}
-                className="accent-green-600 scale-110"
-              />
-              <span className="text-gray-700 dark:text-gray-300">Add Standard Gate</span>
-            </div>
+          {/* Fence Type Selector */}
+          <FenceTypeSelector
+            selectedFence={selectedFence}
+            setSelectedFence={setSelectedFence}
+            FENCE_TYPES={FENCE_TYPES}
+          />
 
-            {includeGate && (
-              <div>
-                <label className="block text-gray-700 dark:text-gray-300 mb-1">
-                  Gate Width (ft)
-                </label>
-                <input
-                  type="number"
-                  value={gateWidth}
-                  onChange={(e) => setGateWidth(Number(e.target.value))}
-                  className="w-full p-3 rounded-lg border border-gray-300 dark:bg-gray-800 dark:text-white"
-                  placeholder="e.g. 4"
-                />
-              </div>
-            )}
+          {/* Add-Ons */}
+          <FenceAddonsPanel
+            includeGate={includeGate}
+            setIncludeGate={setIncludeGate}
+            gateWidth={gateWidth}
+            setGateWidth={setGateWidth}
+            includeTopCap={includeTopCap}
+            setIncludeTopCap={setIncludeTopCap}
+            includeBoardOnBoard={includeBoardOnBoard}
+            setIncludeBoardOnBoard={setIncludeBoardOnBoard}
+          />
 
-            <div className="flex items-center gap-3">
-              <input
-                type="checkbox"
-                checked={includeTopCap}
-                onChange={() => setIncludeTopCap(!includeTopCap)}
-                className="accent-green-600 scale-110"
-              />
-              <span className="text-gray-700 dark:text-gray-300">Add Decorative Top Cap</span>
-            </div>
-
-            <div className="flex items-center gap-3">
-              <input
-                type="checkbox"
-                checked={includeBoardOnBoard}
-                onChange={() => setIncludeBoardOnBoard(!includeBoardOnBoard)}
-                className="accent-green-600 scale-110"
-              />
-              <span className="text-gray-700 dark:text-gray-300">Add Board-on-Board Design</span>
-            </div>
-          </div>
-
-          {/* Estimate Buttons */}
-          <div className="flex flex-wrap justify-center gap-4 mt-4">
-            {(!useMap || mapReady) ? (
-              <button
-                onClick={handleEstimate}
-                className="bg-green-600 text-white px-6 py-3 rounded-full hover:bg-green-700 shadow-md transition-all duration-300"
-              >
-                Calculate Estimate
-              </button>
-            ) : (
-              <p className="text-sm text-gray-500 italic">
-                Draw your fence on the map to enable estimate.
-              </p>
-            )}
-
-            {estimate !== null && (
-              <button
-                onClick={handleClear}
-                className="bg-gray-100 text-red-600 px-4 py-2 rounded-full hover:bg-gray-200 transition duration-300 text-sm"
-              >
-                Clear
-              </button>
-            )}
-          </div>
+          {/* Action Buttons */}
+          <FenceControls
+            handleEstimate={handleEstimate}
+            handleClear={handleClear}
+            estimate={estimate}
+            mapReady={mapReady}
+            useMap={useMap}
+          />
 
           {/* Estimate Output */}
-          <AnimatePresence>
-            {estimate !== null && (
-              <motion.div
-                className="mt-6 bg-green-50 dark:bg-green-900 text-green-900 dark:text-white p-6 rounded-xl text-center shadow-lg"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.5 }}
-              >
-                <p className="text-lg">Estimated Total</p>
-                <p className="text-4xl font-bold mt-2">${estimate.toLocaleString()}</p>
-              </motion.div>
-            )}
-          </AnimatePresence>
+          <EstimateOutput estimate={estimate} />
 
-          {/* LEAD FORM */}
+          {/* Lead Form */}
           {estimate !== null && (
-            <form
-              action="https://formspree.io/f/xdkzjjaz"
-              method="POST"
-              className="mt-8 space-y-4"
-            >
-              <h3 className="text-xl font-semibold text-gray-800 dark:text-white text-center">
-                Get Your Estimate & Quote
-              </h3>
-
-              <input
-                type="text"
-                name="name"
-                required
-                placeholder="Your Name"
-                className="w-full p-3 rounded-lg border border-gray-300 dark:bg-gray-800 dark:text-white"
-              />
-              <input
-                type="email"
-                name="email"
-                required
-                placeholder="you@example.com"
-                className="w-full p-3 rounded-lg border border-gray-300 dark:bg-gray-800 dark:text-white"
-              />
-              <input
-                type="tel"
-                name="phone"
-                placeholder="Phone (optional)"
-                className="w-full p-3 rounded-lg border border-gray-300 dark:bg-gray-800 dark:text-white"
-              />
-
-              <textarea
-                name="message"
-                hidden
-                value={
-                  `🧱 Fence Estimate Summary\n\n` +
-                  `📏 Linear Feet: ${linearFeet} ft\n` +
-                  `🚪 Gate Included: ${includeGate ? "Yes" : "No"}\n` +
-                  (includeGate ? `➡️ Gate Width: ${gateWidth} ft\n` : "") +
-                  `🧢 Decorative Top Cap: ${includeTopCap ? "Yes" : "No"}\n` +
-                  `🪵 Board-on-Board Design: ${includeBoardOnBoard ? "Yes" : "No"}\n` +
-                  `💵 Total Estimate: $${estimate?.toLocaleString()}\n`
-                }
-              />
-
-              <textarea
-                name="extra_notes"
-                placeholder="Any additional message for us?"
-                rows="4"
-                className="w-full p-3 rounded-lg border border-gray-300 dark:bg-gray-800 dark:text-white"
-              ></textarea>
-
-              <button
-                type="submit"
-                className="w-full bg-green-600 text-white px-6 py-3 rounded-full hover:bg-green-700 transition-all duration-300 shadow-md"
-              >
-                Send My Estimate
-              </button>
-            </form>
+            <LeadForm
+              linearFeet={linearFeet}
+              selectedFence={selectedFence}
+              FENCE_TYPES={FENCE_TYPES}
+              includeGate={includeGate}
+              gateWidth={gateWidth}
+              includeTopCap={includeTopCap}
+              includeBoardOnBoard={includeBoardOnBoard}
+              estimate={estimate}
+            />
           )}
         </div>
       </div>

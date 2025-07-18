@@ -25,3 +25,16 @@
 body{
  background-color: var(--primary-color);
 }
+/* styles.css or in a global Tailwind-compatible CSS file */
+.dot-marker {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #10b981; /* emerald-500 */
+  border: 2px solid white;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
+}
+/* In index.css or global.css */
+html {
+  scroll-behavior: smooth;
+}

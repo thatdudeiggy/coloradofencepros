@@ -1,78 +1,74 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { ArrowRightCircle } from "lucide-react";
 
 import fence1 from "../Assets/fence1.svg";
 import fence2 from "../Assets/fence2.svg";
 import fence3 from "../Assets/fence3.svg";
 
 const Hero = () => {
-
-
   return (
-    <section className=" mx-6 overflow-hidden">
-      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 items-center gap-12 relative">
-        {/* Left Side Text */}
-        <div className="text-center md:text-left z-10">
-          <h1 className="text-4xl md:text-5xl font-bold  text-green-500 mb-6" style={{ textShadow: "2px 2px 4px rgba(0,0,0,0.3)" }}>
-            Get an Instant Fence Estimate Online
+    <section className="py-16 bg-white dark:bg-gray-900">
+      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-12 px-6 lg:px-12">
+        {/* Left Content */}
+        <motion.div
+          initial={{ x: -40, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ duration: 0.8 }}
+          className="text-center md:text-left flex-1"
+        >
+          <h1 className="text-4xl sm:text-5xl font-extrabold text-green-600 leading-tight mb-6">
+            Get an Instant Fence Estimate{" "}
+            <span className="inline-block bg-green-600 text-white px-2 py-1 rounded-xl shadow-sm">
+              today
+            </span>
           </h1>
-          <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-8">
-            Choose your fence style, enter your footage, and get an accurate cost.
+
+          <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-300 mb-8">
+            Choose your fence style, enter your footage, and get an accurate cost in seconds.
           </p>
+
           <a
             href="#estimator"
-            className="inline-block bg-green-500 text-white px-6 py-3 rounded-full text-lg hover:bg-green-700 transition duration-300"
+            className="inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white font-medium px-6 py-3 rounded-full shadow-lg transition"
           >
-            Get My Estimate
+            Get My Estimate <ArrowRightCircle size={22} />
           </a>
-        </div>
+        </motion.div>
 
-        {/* Right Side Visual Design */}
-        <div className="relative w-full h-[600px] flex items-center justify-center z-0">
-          {/* Background Design Layout */}
-          <div className="relative w-[450px] h-[550px] flex flex-col gap-4 items-center justify-center">
-            {/* Top Row */}
-            <div className="flex gap-4">
-              <motion.img
-                src={fence1}
-                alt="Fence 1"
-                className="w-[210px] h-[150px]  object-cover rounded-xl shadow-md"
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2, duration: 0.5 }}
-              />
-              <motion.img
-                src={fence2}
-                alt="Fence 2"
-                className="w-[210px] h-[150px] object-cover rounded-xl shadow-md"
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.3, duration: 0.5 }}
-              />
-            </div>
-
+        {/* Right Side Image Stack */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.3, duration: 0.8 }}
+          className="flex-1 flex flex-col items-center gap-6"
+        >
+          <div className="flex flex-wrap justify-center gap-4">
             <motion.img
-              src={fence3}
-              alt="Fence 3"
-              className="w-[420px] h-[180px] object-cover rounded-xl shadow-lg mt-4"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6, duration: 0.5 }}
+              src={fence1}
+              alt="Fence Style 1"
+              className="w-40 sm:w-48 rounded-xl shadow-md"
+              whileHover={{ scale: 1.05 }}
+              transition={{ type: "spring", stiffness: 300 }}
+            />
+            <motion.img
+              src={fence2}
+              alt="Fence Style 2"
+              className="w-40 sm:w-48 rounded-xl shadow-md"
+              whileHover={{ scale: 1.05 }}
+              transition={{ type: "spring", stiffness: 300, delay: 0.1 }}
             />
           </div>
 
-          {/* Placeholder Circles (Replace with SVG Later) */}
-          <motion.div
-            className="w-6 h-6 bg-green-400 rounded-full absolute top-4 left-4"
-            animate={{ y: [0, -8, 0] }}
-            transition={{ repeat: Infinity, duration: 2 }}
+          <motion.img
+            src={fence3}
+            alt="Fence Style 3"
+            className="w-[90%] sm:w-[420px] rounded-xl shadow-lg"
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.6, duration: 0.6 }}
           />
-          <motion.div
-            className="w-6 h-6 bg-green-400 rounded-full absolute bottom-6 right-6"
-            animate={{ y: [0, -8, 0] }}
-            transition={{ repeat: Infinity, duration: 2.4 }}
-          />
-        </div>
+        </motion.div>
       </div>
     </section>
   );
