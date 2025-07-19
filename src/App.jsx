@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import ReactDOM from 'react-dom/client'
 import Navbar from './Components/NavBar'
 import Hero from './Components/Hero'
+import Types from './Components/Types'
 import FenceEstimator from './Components/FenceEstimator'
 import LeadCaptureForm from './Components/LeadCaptureForm'
 import './index.css'
@@ -13,7 +14,9 @@ export default class App extends Component {
         <Navbar />
         <Hero />
         <FenceEstimator />
+        <Types />
         <LeadCaptureForm />
+        
       </div>
     )
   }
