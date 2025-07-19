@@ -9,7 +9,7 @@ import fence3 from "../Assets/fence3.svg";
 const Hero = () => {
   return (
     <section className="py-16 bg-white dark:bg-gray-900">
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-12 px-6 lg:px-12">
+      <div className="max-w-7xl mx-auto mr-14 flex flex-col md:flex-row items-center justify-between gap-12">
         {/* Left Content */}
         <motion.div
           initial={{ x: -40, opacity: 0 }}
@@ -19,9 +19,9 @@ const Hero = () => {
         >
           <h1 className="text-4xl sm:text-5xl font-extrabold text-green-600 leading-tight mb-6">
             Get an Instant Fence Estimate{" "}
-            <span className="inline-block bg-green-600 text-white px-2 py-1 rounded-xl shadow-sm">
+            {/* <span className="inline-block bg-green-600 text-white px-2 py-1 rounded-xl shadow-sm">
               today
-            </span>
+            </span> */}
           </h1>
 
           <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-300 mb-8">
