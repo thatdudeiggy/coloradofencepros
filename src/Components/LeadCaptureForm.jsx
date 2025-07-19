@@ -7,6 +7,7 @@ const FooterLeadForm = ({ estimate, linearFeet, gateWidth, includeTopCap, includ
     name: "",
     email: "",
     phone: "",
+    address: "",
     message: "",
   });
   const [errors, setErrors] = useState({});
@@ -45,10 +46,10 @@ const FooterLeadForm = ({ estimate, linearFeet, gateWidth, includeTopCap, includ
   };
 
   return (
-    <footer id="contact" className="w-full bg-gray-100 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 py-12 px-6 md:px-20">
+    <footer className="w-full bg-gray-100 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 py-12 px-6 md:px-20">
       <ToastContainer />
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-center text-2xl md:text-3xl font-semibold text-gray-900 dark:text-white mb-8">
+        <h2 className="text-center text-3xl font-semibold text-gray-900 dark:text-white mb-10">
           Request a Free Estimate
         </h2>
 
@@ -58,33 +59,34 @@ const FooterLeadForm = ({ estimate, linearFeet, gateWidth, includeTopCap, includ
           </p>
         ) : (
           <form
-            action="https://formspree.io/f/meokdnyw"
+            action="https://formspree.io/f/xdkzjjaz"
             method="POST"
             onSubmit={handleSubmit}
-            className="grid grid-cols-1 md:grid-cols-3 gap-6 bg-white dark:bg-gray-800 p-6 rounded-2xl "
+            className="grid grid-cols-1 md:grid-cols-3 gap-6 bg-white dark:bg-gray-800 p-8 rounded-3xl shadow-lg"
           >
-            {/* Hidden Estimate Data Fields */}
+            {/* Hidden Estimate Fields */}
             <input type="hidden" name="estimate" value={`$${estimate || 0}`} />
             <input type="hidden" name="linearFeet" value={linearFeet || 0} />
             <input type="hidden" name="gateWidth" value={gateWidth || 0} />
             <input type="hidden" name="includeTopCap" value={includeTopCap ? "Yes" : "No"} />
             <input type="hidden" name="includeBoardOnBoard" value={includeBoardOnBoard ? "Yes" : "No"} />
 
-            {/* Column 1: Name and Email */}
-            <div className="space-y-4">
+            {/* Column 1: Name & Email */}
+            <div className="space-y-5">
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Name *</label>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Full Name *</label>
                 <input
                   type="text"
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
-                  className="w-full p-3 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white"
+                  className="w-full p-3 rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white shadow-sm"
                   placeholder="Your Name"
                   required
                 />
                 {errors.name && <p className="text-red-500 text-sm">{errors.name}</p>}
               </div>
+
               <div>
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Email *</label>
                 <input
@@ -92,7 +94,7 @@ const FooterLeadForm = ({ estimate, linearFeet, gateWidth, includeTopCap, includ
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  className="w-full p-3 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white"
+                  className="w-full p-3 rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white shadow-sm"
                   placeholder="you@example.com"
                   required
                 />
@@ -100,8 +102,8 @@ const FooterLeadForm = ({ estimate, linearFeet, gateWidth, includeTopCap, includ
               </div>
             </div>
 
-            {/* Column 2: Phone and Message */}
-            <div className="space-y-4">
+            {/* Column 2: Phone & Address */}
+            <div className="space-y-5">
               <div>
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Phone</label>
                 <input
@@ -109,33 +111,43 @@ const FooterLeadForm = ({ estimate, linearFeet, gateWidth, includeTopCap, includ
                   name="phone"
                   value={formData.phone}
                   onChange={handleChange}
-                  className="w-full p-3 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white"
+                  className="w-full p-3 rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white shadow-sm"
                   placeholder="(123) 456-7890"
                 />
               </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Address</label>
+                <input
+                  type="text"
+                  name="address"
+                  value={formData.address}
+                  onChange={handleChange}
+                  className="w-full p-3 rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white shadow-sm"
+                  placeholder="123 Apple St, Cupertino, CA"
+                />
+              </div>
+            </div>
+
+            {/* Column 3: Message & Submit */}
+            <div className="flex flex-col justify-between space-y-5">
               <div>
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Message</label>
                 <textarea
                   name="message"
                   value={formData.message}
                   onChange={handleChange}
-                  rows="4"
-                  className="w-full p-3 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white"
-                  placeholder="Tell us more about your fence..."
+                  rows="5"
+                  className="w-full p-3 rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white shadow-sm resize-none"
+                  placeholder="Let us know about your project..."
                 ></textarea>
               </div>
-            </div>
 
-            {/* Column 3: Submit Button */}
-            <div className="flex flex-col justify-between">
-              <p className="text-sm text-gray-500 dark:text-gray-400 italic mb-6">
-                Fill the form to receive your detailed estimate via email.
-              </p>
               <button
                 type="submit"
-                className="bg-black text-white px-6 py-3 rounded-full hover:bg-green-700 transition-all duration-300 shadow-md"
+                className="mt-4 bg-black text-white py-3 rounded-full hover:bg-green-700 transition duration-300 shadow-md"
               >
-                Send Estimate
+                Get Estimate
               </button>
             </div>
           </form>
