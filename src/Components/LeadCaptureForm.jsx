@@ -46,7 +46,7 @@ const FooterLeadForm = ({ estimate, linearFeet, gateWidth, includeTopCap, includ
   };
 
   return (
-    <footer className="w-full bg-gray-100 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 py-12 px-6 md:px-20">
+    <footer id="contact" className="w-full bg-gray-100 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 py-12 px-6 md:px-20">
       <ToastContainer />
       <div className="max-w-7xl mx-auto">
         <h2 className="text-center text-3xl font-semibold text-gray-900 dark:text-white mb-10">
@@ -58,7 +58,8 @@ const FooterLeadForm = ({ estimate, linearFeet, gateWidth, includeTopCap, includ
             ✅ Thank you! We'll be in touch shortly.
           </p>
         ) : (
-          <form
+            <form
+              id="lead-form"
             action="https://formspree.io/f/xdkzjjaz"
             method="POST"
             onSubmit={handleSubmit}
