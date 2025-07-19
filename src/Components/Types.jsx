@@ -61,7 +61,7 @@ const FenceTypes = () => {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
           {Object.entries(FENCE_TYPES).map(
-            ([key, { label, price, description }], index) => (
+            ([key, { label, description }], index) => (
               <motion.div
                 key={key}
                 className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-3xl shadow-md p-6 sm:p-7 transition-all duration-300 hover:bg-green-500 hover:text-white group"
@@ -71,12 +71,9 @@ const FenceTypes = () => {
                 variants={cardVariants}
                 whileHover={{ scale: 1.03 }}
               >
-                <h3 className="text-lg font-semibold text-gray-800 dark:text-white group-hover:text-white mb-1 transition-colors">
+                <h3 className="text-lg font-semibold text-gray-800 dark:text-white group-hover:text-white mb-2 transition-colors">
                   {label}
                 </h3>
-                <p className="text-green-600 dark:text-green-400 font-medium mb-2 group-hover:text-white">
-                  ${price} / linear foot
-                </p>
                 <p className="text-sm text-gray-500 dark:text-gray-400 group-hover:text-green-100">
                   {description}
                 </p>
