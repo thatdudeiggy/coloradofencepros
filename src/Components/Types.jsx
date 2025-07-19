@@ -51,11 +51,11 @@ const cardVariants = {
 const FenceTypes = () => {
   return (
     <section className="py-20 px-4 md:px-8 lg:px-16 bg-white dark:bg-gray-900">
-      <div className="max-w-7xl mx-auto">
-        <h2 className="text-4xl md:text-5xl font-semibold text-green-500 mb-6 text-left">
+      <div className="max-w-7xl mx-auto text-center">
+        <h2 className="text-4xl md:text-5xl font-semibold text-green-500 mb-6">
           Fence Options
         </h2>
-        <p className="text-gray-600 dark:text-gray-300 max-w-xl mb-12 text-left text-lg">
+        <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-12 text-lg">
           Clean styles. Strong builds. Choose what fits best.
         </p>
 
