@@ -9,7 +9,7 @@ import './index.css'
 export default class App extends Component {
   render() {
     return (
-      <div>
+      <div className="px-4 py-6 md:px-8 md:py-10 lg:px-12 lg:py-14">
         <Navbar />
         <Hero />
         <FenceEstimator />
@@ -18,4 +18,3 @@ export default class App extends Component {
     )
   }
 }
-

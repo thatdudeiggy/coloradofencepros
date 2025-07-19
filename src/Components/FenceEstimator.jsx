@@ -62,18 +62,8 @@ const FenceEstimator = () => {
   return (
     <section
       id="estimator"
-      className="w-full bg-gradient-to-tr from-green-700 to-green-500 py-16 relative overflow-hidden"
+      className="w-full bg-gradient-to-tr from-green-600 to-green-400 py-16 relative overflow-hidden"
     >
-      {/* Fence-style Top Border */}
-      <div className="absolute top-0 left-0 w-full h-8 bg-white dark:bg-gray-900">
-        <svg className="w-full h-full" viewBox="0 0 100 10" preserveAspectRatio="none">
-          <polygon
-            points="0,10 2.5,0 5,10 7.5,0 10,10 12.5,0 15,10 17.5,0 20,10 100,10"
-            fill="white"
-            className="dark:fill-gray-900"
-          />
-        </svg>
-      </div>
 
       {/* Content */}
       <div className="relative z-10 max-w-5xl mx-auto px-4 md:px-8">
